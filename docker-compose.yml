@@ -17,6 +17,19 @@ services:
       - cowrie-downloads:/cowrie/cowrie-git/var/lib/cowrie/downloads
       - cowrie-tty:/cowrie/cowrie-git/var/lib/cowrie/tty
 
+  db:
+    image: postgres:16-alpine
+    container_name: honeypot-db
+    restart: unless-stopped
+    env_file: .env             # user, password, db name come from .env (not from Git)
+    ports:
+      # 127.0.0.1 = only YOUR laptop can reach the database, not the network.
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+
 volumes:
   cowrie-downloads:
   cowrie-tty:
+  pgdata:

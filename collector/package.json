@@ -1,13 +1,18 @@
 {
   "name": "honeypot-collector",
-  "version": "0.1.0",
-  "description": "Reads Cowrie JSON logs live and turns them into clean attack events",
+  "version": "0.2.1",
+  "description": "Reads Cowrie JSON logs live, adds GeoIP and saves attacks to PostgreSQL",
   "type": "module",
   "main": "src/index.js",
   "scripts": {
-    "start": "node src/index.js"
+    "start": "node --env-file-if-exists=../.env src/index.js",
+    "start:all": "node --env-file-if-exists=../.env src/index.js --all"
+  },
+  "dependencies": {
+    "maxmind": "^4.3.0",
+    "pg": "^8.13.0"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=22.9"
   }
 }

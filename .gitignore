@@ -12,3 +12,7 @@ honeypot/logs/*
 # Node
 node_modules/
 dist/
+
+# GeoIP folder (MaxMind licence: do not publish the database)
+geoip/
+!.env.example
