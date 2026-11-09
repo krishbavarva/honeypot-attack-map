@@ -1,0 +1,22 @@
+# Honeypot Attack Map - local lab
+# Start:  docker compose up -d
+# Stop:   docker compose down
+services:
+  cowrie:
+    image: cowrie/cowrie:latest
+    container_name: cowrie
+    restart: unless-stopped
+    ports:
+      - "2222:2222"            # fake SSH. On the cloud server we will map 22 -> 2222
+    volumes:
+      # JSON logs are written LIVE into ./honeypot/logs on your laptop,
+      # so the collector can read them.
+      - ./honeypot/logs:/cowrie/cowrie-git/var/log/cowrie
+      # Files downloaded by attackers (possible malware) and session
+      # recordings stay INSIDE Docker volumes, never on your Windows disk.
+      - cowrie-downloads:/cowrie/cowrie-git/var/lib/cowrie/downloads
+      - cowrie-tty:/cowrie/cowrie-git/var/lib/cowrie/tty
+
+volumes:
+  cowrie-downloads:
+  cowrie-tty:

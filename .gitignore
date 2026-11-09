@@ -1,0 +1,14 @@
+# Honeypot data: never commit logs (they contain attacker IPs = personal data under GDPR)
+honeypot/logs/*
+!honeypot/logs/.gitkeep
+
+# Secrets
+.env
+*.env
+
+# GeoIP database (licensed by MaxMind, download it yourself)
+*.mmdb
+
+# Node
+node_modules/
+dist/

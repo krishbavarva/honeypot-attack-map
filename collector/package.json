@@ -1,0 +1,13 @@
+{
+  "name": "honeypot-collector",
+  "version": "0.1.0",
+  "description": "Reads Cowrie JSON logs live and turns them into clean attack events",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
