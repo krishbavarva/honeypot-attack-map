@@ -58,3 +58,7 @@ CREATE TRIGGER sessions_notify AFTER INSERT OR UPDATE ON sessions
 DROP TRIGGER IF EXISTS events_notify ON events;
 CREATE TRIGGER events_notify AFTER INSERT ON events
   FOR EACH ROW EXECUTE FUNCTION notify_attack();
+
+-- Simulator flag (see db/migrations/003_demo_flag.sql)
+ALTER TABLE sessions ADD COLUMN IF NOT EXISTS is_demo BOOLEAN NOT NULL DEFAULT FALSE;
+CREATE INDEX IF NOT EXISTS idx_sessions_demo ON sessions (is_demo);

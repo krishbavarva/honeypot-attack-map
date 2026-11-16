@@ -51,7 +51,7 @@ export async function recentSessions(url) {
   const limit = limitParam(url, 50, 500);
   const { rows } = await pool.query(
     `SELECT s.id, s.src_ip, s.started_at, s.duration_ms, s.client_version, s.login_success,
-            s.country_code, s.country, s.city, s.latitude, s.longitude,
+            s.country_code, s.country, s.city, s.latitude, s.longitude, s.is_demo,
             (SELECT COUNT(*)::int FROM events e WHERE e.session_id = s.id AND e.type = 'command') AS commands
      FROM sessions s ORDER BY s.started_at DESC LIMIT $1`,
     [limit],
